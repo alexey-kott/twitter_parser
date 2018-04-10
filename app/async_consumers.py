@@ -19,12 +19,13 @@ async def parser(self, uid):
     # options.add_argument("--headless")
     driver = webdriver.Chrome("./app/webdriver/chromedriver", chrome_options=options)
 
-    driver.get("https://twitter.com/hashtag/АнжиСпартак?src=tren")
-    # driver.get("https://www.twitter.com/katecherryway13")
+    # driver.get("https://twitter.com/hashtag/АнжиСпартак?src=tren")
+    driver.get("https://www.twitter.com/katecherryway13")
     driver.find_element_by_tag_name('body').send_keys(Keys.ESCAPE)
+    sleep(1)
 
     for i in range(1000):
-        # await async_sleep(1) 
+        await async_sleep(1) 
         print(uid)
         driver.find_element_by_tag_name('body').send_keys(Keys.END)
 
