@@ -26,34 +26,45 @@ async def parser(username=None, app_consumer=None):
     # options.add_argument("--headless")
     driver = webdriver.Chrome("./app/webdriver/chromedriver", chrome_options=options)
 
-    # driver.get("https://twitter.com/hashtag/АнжиСпартак?src=tren")
-    # driver.get("https://www.twitter.com/katecherryway13")
-    driver.get(f"https://www.twitter.com/{username}")
-    driver.find_element_by_tag_name('body').send_keys(Keys.ESCAPE)
+    try:
 
-    for i in range(1000):
-        # print(uid)
-        driver.find_element_by_tag_name('body').send_keys(Keys.END)
+        # driver.get("https://twitter.com/hashtag/АнжиСпартак?src=tren")
+        # driver.get("https://www.twitter.com/katecherryway13")
+        driver.get(f"https://www.twitter.com/{username}")
+        driver.find_element_by_tag_name('body').send_keys(Keys.ESCAPE)
 
-        # await async_sleep(0.5) 
-        # await app_consumer.send(text_data=json.dumps({'text': i}))
-        source_code = driver.find_element_by_tag_name('body').get_attribute('innerHTML')
-        soup = BeautifulSoup(source_code, "lxml")
-        tweets_block = soup.find(id="stream-items-id")
-        print(len(tweets_block.find_all(class_="stream-item")))
-        continue
-        for tweet_block in tweets_block.find_all(class_="stream-item"):
+        for i in range(1000):
+            # print(uid)
+            driver.find_element_by_tag_name('body').send_keys(Keys.END)
 
-            # print(tweet_block.prettify())
+            # await async_sleep(0.5) 
+            # await app_consumer.send(text_data=json.dumps({'text': i}))
+            source_code = driver.find_element_by_tag_name('body').get_attribute('innerHTML')
+            soup = BeautifulSoup(source_code, "lxml")
+            tweets_block = soup.find(id="stream-items-id")
+            # print(len(tweets_block.find_all(class_="stream-item")))
 
+            tweets = []
+            for tweet_block in tweets_block.find_all(class_="stream-item"):
 
-            tweet_text = tweet_block.find_all(class_="tweet-text")
-            print(tweet_text)
-
-            print("________________________________________________________________________________________________________________________________________________")
+                # print(tweet_block.prettify())
 
 
+                tweet_text = tweet_block.find_all(class_="tweet-text")[0]
+                name = None
+                tweet_date = tweet_block.find_all(class_="tweet-timestamp")[0]['title']
+                link = None
+                is_retweet = None
+                # tweets.append({
+                #     "text": tweet_text,
+                #     "date": tweet_date,
+                #     "retweet": is_retweet
+                #     })
 
+                print("________________________________________________________________________________________________________________________________________________")
+
+    except Exception as e:  
+        driver.close()
 
 
 class AppConsumer(AsyncWebsocketConsumer):
