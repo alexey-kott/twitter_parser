@@ -55,6 +55,7 @@ async def parser(username=None, app_consumer=None):
                 tweet_date = tweet_block.find_all(class_="tweet-timestamp")[0]['title']
                 link = None
                 is_retweet = None
+                print(tweet_text)
                 # tweets.append({
                 #     "text": tweet_text,
                 #     "date": tweet_date,
@@ -64,6 +65,8 @@ async def parser(username=None, app_consumer=None):
                 print("________________________________________________________________________________________________________________________________________________")
 
     except Exception as e:  
+        print(str(e))
+        print(e)
         driver.close()
 
 

@@ -1,4 +1,4 @@
-#!/home/alexkott/Documents/trash/twitter_parser/venv/bin/python
+#!/home/alexkott/Documents/YouDo/twitter_parser/venv/bin/python
 
 import sys
 import getopt

@@ -4,6 +4,8 @@ async-timeout==2.0.1
 attrs==17.4.0
 autobahn==18.4.1
 Automat==0.6.0
+beautifulsoup4==4.6.0
+bs4==0.0.1
 channels==2.0.2
 channels-redis==2.1.1
 constantly==15.1.0
@@ -13,8 +15,11 @@ hiredis==0.2.0
 hyperlink==18.0.0
 idna==2.6
 incremental==17.5.0
+lxml==4.2.1
 msgpack==0.5.6
+pkg-resources==0.0.0
 pytz==2018.3
+selenium==3.11.0
 six==1.11.0
 Twisted==17.9.0
 txaio==2.10.0
