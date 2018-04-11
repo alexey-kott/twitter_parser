@@ -23,7 +23,7 @@ async def parser(username=None, app_consumer=None):
     print(f"Start parsing: {username}")
     options = webdriver.ChromeOptions()
     # options.add_argument("--start-maximized")
-    # options.add_argument("--headless")
+    options.add_argument("--headless")
     driver = webdriver.Chrome("./app/webdriver/chromedriver", chrome_options=options)
 
     try:
@@ -55,14 +55,18 @@ async def parser(username=None, app_consumer=None):
                 tweet_date = tweet_block.find_all(class_="tweet-timestamp")[0]['title']
                 link = None
                 is_retweet = None
-                print(tweet_text)
+                # print(tweet_text.__dict__)
+                if len(tweet_text.contents) > 1:
+                    print(tweet_text.contents[1])
+                    
                 # tweets.append({
                 #     "text": tweet_text,
                 #     "date": tweet_date,
                 #     "retweet": is_retweet
                 #     })
 
-                print("________________________________________________________________________________________________________________________________________________")
+                print('\n')
+                # print("________________________________________________________________________________________________________________________________________________")
 
     except Exception as e:  
         print(str(e))
