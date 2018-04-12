@@ -37,10 +37,11 @@
     // console.log(web_socket)
 
     web_socket.onmessage = function(e) {
-        console.log(e.data)
         var data = JSON.parse(e.data);
-        var message = data['text'];
-        // document.querySelector('#chat-log').value += (message + '\n');
+        // console.log(data)
+        for(var i =0; i<data.length; i++){
+            console.log(data[i].text)
+        }
     };
 
     web_socket.onclose = function(e) {
