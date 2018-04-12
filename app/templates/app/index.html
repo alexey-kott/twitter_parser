@@ -14,15 +14,14 @@
     <div class="row">
         <div class="col-lg-3 col-md-3 col-sm-0 col-xs-0"></div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
-            <form>
+            
                 <div class="form-group">
-                    <input type="text" class="form-control" id="username-input" placeholder="Username">
+                    <input type="text" class="form-control" id="username-input" placeholder="Username" value="vkozulya" >
                 </div>
                 <div class="form-group">
                     <input id="username-submit" type="button" value="Send" class="btn btn-primary form-control"/>
 
                 </div>
-            </form>
             <div id="tweets">
 
 
@@ -34,7 +33,6 @@
     
 </body>
 <script>
-
     var web_socket = new WebSocket('ws://' + window.location.host + '/');
     // console.log(web_socket)
 
@@ -50,26 +48,27 @@
 
     };
 
-    document.querySelector('#username-input').focus();
-    document.querySelector('#username-input').onkeyup = function(e) {
-        if (e.keyCode === 13) {  // enter, return
-            document.querySelector('#username-submit').click();
+    $('#username-input').focus();
+    $('#username-input').on("keyup", function(e) {
+        if (e.keyCode === 13) { // enter, return
+            $('#username-submit').click();
         }
-    };
+    })
 
-    document.querySelector('#username-submit').onclick = function(e) {
-        var usernameInputDom = document.querySelector('#username-input');
-        var username = usernameInputDom.value;
-        if(username == '') return 0;
+    $('#username-submit').on("click", function(e) {
+        var username = $('#username-input').val()
+        if (username == '') return 0;
+
+        if(web_socket.readyState == 3){
+            web_socket = new WebSocket('ws://' + window.location.host + '/');
+        }else{
+            web_socket.send(JSON.stringify({
+                'username': username
+            }))    
+        }
+        // console.log(web_socket)
         
-        
-        web_socket.send(JSON.stringify({
-            'username': username
-        }));
 
-        // usernameInputDom.value = '';
-
-
-    };
+    })
 </script>
 </html>

@@ -12,63 +12,77 @@ import uuid
 
 from bs4 import BeautifulSoup
 
+def is_retweet(tweet_block):
+    tweet = tweet_block.find_all(class_="tweet")[0]
+    try:
+        retweeter = tweet['data-retweeter']
+        return False
+    except:
+        return True
+
+def diff(old_list, new_list):
+
+    return new_list[len(old_list):]
 
 
-async def parser(username=None, app_consumer=None):
+driver_tasks = {}
+
+async def parser(username=None, app_consumer=None, task_uid=None):
     if username is None:
         return False
-
-    uid = uuid.uuid4()
 
     print(f"Start parsing: {username}")
     options = webdriver.ChromeOptions()
     # options.add_argument("--start-maximized")
-    options.add_argument("--headless")
+    # options.add_argument("--headless")
     driver = webdriver.Chrome("./app/webdriver/chromedriver", chrome_options=options)
-
+    
+    # driver_tasks[task_uid] = driver
     try:
 
-        # driver.get("https://twitter.com/hashtag/АнжиСпартак?src=tren")
-        # driver.get("https://www.twitter.com/katecherryway13")
         driver.get(f"https://www.twitter.com/{username}")
         driver.find_element_by_tag_name('body').send_keys(Keys.ESCAPE)
 
+        
+
         for i in range(1000):
-            # print(uid)
             driver.find_element_by_tag_name('body').send_keys(Keys.END)
 
-            # await async_sleep(0.5) 
-            # await app_consumer.send(text_data=json.dumps({'text': i}))
+
             source_code = driver.find_element_by_tag_name('body').get_attribute('innerHTML')
             soup = BeautifulSoup(source_code, "lxml")
             tweets_block = soup.find(id="stream-items-id")
-            # print(len(tweets_block.find_all(class_="stream-item")))
 
-            tweets = []
-            for tweet_block in tweets_block.find_all(class_="stream-item"):
+            
+            
+            
+            tweet_list = []
+            old_tweet_list = []
+            await app_consumer.send(text_data=json.dumps({'text':'HELLO'}))
+            # for tweet_block in tweets_block.find_all(class_="stream-item"):
+                
 
-                # print(tweet_block.prettify())
-
-
-                tweet_text = tweet_block.find_all(class_="tweet-text")[0]
-                name = None
-                tweet_date = tweet_block.find_all(class_="tweet-timestamp")[0]['title']
-                link = None
-                is_retweet = None
-                # print(tweet_text.__dict__)
-                if len(tweet_text.contents) > 1:
-                    print(tweet_text.contents[1])
-                    
-                # tweets.append({
+                # tweet_text = tweet_block.find_all(class_="tweet-text")[0].text
+                # name = None
+                # tweet_date = tweet_block.find_all(class_="tweet-timestamp")[0]['title']
+                # tweet_id = tweet_block['data-item-id']
+                
+                # tweet_list.append({
                 #     "text": tweet_text,
                 #     "date": tweet_date,
-                #     "retweet": is_retweet
+                #     "is_retweet": is_retweet(tweet_block),
+                #     "link": f"https://twitter.com/vkozulya/status/{tweet_id}"            
                 #     })
 
-                print('\n')
-                # print("________________________________________________________________________________________________________________________________________________")
+            # tweet_diff = diff(old_tweet_list, tweet_list)
+
+            # old_tweet_list = tweet_list
+            # tweet_list = []
+            # print('\n')
+                # print("  ________________________________________________________________________________________________________________________________________________")
 
     except Exception as e:  
+        print("PARSING END")
         print(str(e))
         print(e)
         driver.close()
@@ -97,8 +111,8 @@ class AppConsumer(AsyncWebsocketConsumer):
         data = json.loads(text_data)
         username = data['username']
 
-        n = await parser(username=username, app_consumer=self)
-        print(n)
+        await parser(username=username, app_consumer=self, task_uid = uid)
+        # await self.send(text_data=json.dumps({'text': 'lol'}))
 
         # for i in range(100000):
         #     await self.send(text_data=json.dumps({'text': "Hello, world!"}))
@@ -116,6 +130,6 @@ class AppConsumer(AsyncWebsocketConsumer):
     async def disconnect(self, close_code):
         # Called when the socket closes
         print("DISCONNECT")
-        print(close_code)
+        print(self.__dict__)
         self.close()
         
