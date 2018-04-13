@@ -42,53 +42,53 @@ async def parser(username=None, app_consumer=None, task_uid=None):
     # driver_tasks[task_uid] = driver
     try:
 
-    driver.get(f"https://www.twitter.com/{username}")
-    driver.find_element_by_tag_name('body').send_keys(Keys.ESCAPE)
+        driver.get(f"https://www.twitter.com/{username}")
+        driver.find_element_by_tag_name('body').send_keys(Keys.ESCAPE)
 
-    tweet_list = []
-    old_tweet_list = []
-
-    for i in range(1000):
-        driver.find_element_by_tag_name('body').send_keys(Keys.END)
-
-        source_code = driver.find_element_by_tag_name('body').get_attribute('innerHTML')
-        soup = BeautifulSoup(source_code, "lxml")
-        tweets_block = soup.find(id="stream-items-id")
-
-        
-        
-        for tweet_block in tweets_block.find_all(class_="stream-item"):
-            
-
-            tweet_text = tweet_block.find_all(class_="tweet-text")[0].text
-            tweet_date = tweet_block.find_all(class_="tweet-timestamp")[0]['title']
-            tweet_id = tweet_block['data-item-id']
-            
-            tweet_list.append({
-                "text": tweet_text,
-                "date": tweet_date,
-                "is_retweet": is_retweet(tweet_block),
-                "link": f"https://twitter.com/vkozulya/status/{tweet_id}"            
-                })
-
-        # print(len(tweet_list))
-
-        tweet_diff = diff(tweet_list, old_tweet_list)
-        # if tweet_list == old_tweet_list:
-        #     # self.close()
-        #     print("CONNECTION CLOSE")
-        #     return
-
-
-        old_tweet_list = tweet_list
         tweet_list = []
+        old_tweet_list = []
 
-        if app_consumer:
-            await async_sleep(0) # иначе сообщения в следующей строке не отправляются
-            await app_consumer.send(text_data=json.dumps(tweet_diff))
+        for i in range(1000):
+            driver.find_element_by_tag_name('body').send_keys(Keys.END)
 
-            # print('\n')
-                # print("  ________________________________________________________________________________________________________________________________________________")
+            source_code = driver.find_element_by_tag_name('body').get_attribute('innerHTML')
+            soup = BeautifulSoup(source_code, "lxml")
+            tweets_block = soup.find(id="stream-items-id")
+
+            
+            
+            for tweet_block in tweets_block.find_all(class_="stream-item"):
+                
+
+                tweet_text = tweet_block.find_all(class_="tweet-text")[0].text
+                tweet_date = tweet_block.find_all(class_="tweet-timestamp")[0]['title']
+                tweet_id = tweet_block['data-item-id']
+                
+                tweet_list.append({
+                    "text": tweet_text,
+                    "date": tweet_date,
+                    "is_retweet": is_retweet(tweet_block),
+                    "link": f"https://twitter.com/vkozulya/status/{tweet_id}"            
+                    })
+
+            # print(len(tweet_list))
+
+            tweet_diff = diff(tweet_list, old_tweet_list)
+            # if tweet_list == old_tweet_list:
+            #     # self.close()
+            #     print("CONNECTION CLOSE")
+            #     return
+
+
+            old_tweet_list = tweet_list
+            tweet_list = []
+
+            if app_consumer:
+                await async_sleep(0) # иначе сообщения в следующей строке не отправляются
+                await app_consumer.send(text_data=json.dumps(tweet_diff))
+
+                # print('\n')
+                    # print("  ________________________________________________________________________________________________________________________________________________")
 
     except Exception as e:  
         print("PARSING END")
