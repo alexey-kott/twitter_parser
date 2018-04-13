@@ -12,8 +12,8 @@
 </head>
 <body>
     <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-0 col-xs-0"></div>
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+        <div class="col-lg-4 col-md-4 col-sm-0 col-xs-0"></div>
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
             
                 <div class="form-group">
                     <input type="text" class="form-control" id="username-input" placeholder="Username" value="vkozulya" >
@@ -22,26 +22,76 @@
                     <input id="username-submit" type="button" value="Send" class="btn btn-primary form-control"/>
 
                 </div>
-            <div id="tweets">
-
-
-
+            <div id="tweets"></div>
+            <div class="tweet-loading">
+                <center>
+                    <img src="https://raw.githubusercontent.com/Alex-Kott/vk_n_mutual_friends_search/master/load.gif">
+                </center>
             </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-0 col-xs-0"></div>
+        <div class="col-lg-4 col-md-4 col-sm-0 col-xs-0"></div>
     </div>
     
 </body>
+
+<style>
+
+.tweet{
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+}
+
+.tweet-date{
+    font-size: 0.8em;
+    color: grey;
+}
+
+.tweet-loading{
+    display: none;
+}
+
+</style>
 <script>
+
+    function form_tweet(tweet){
+        var is_retweet = '';
+        if(tweet.is_retweet){
+            is_retweet = "ReTweet: "
+        }
+        var elem = `
+        <div class="tweet">
+            <div class="tweet-header">
+                ${is_retweet}<a target="_blank" href="${tweet.link}">Ссылка</a>
+                <span class="tweet-date">${tweet.date}</span>
+            </div>
+            <div class="tweet-body">
+                <p>
+                    ${tweet.text}
+                </p>
+            </div>
+        </div>
+        `
+        return elem;
+    }
+
     var web_socket = new WebSocket('ws://' + window.location.host + '/');
-    // console.log(web_socket)
+    
 
     web_socket.onmessage = function(e) {
         var data = JSON.parse(e.data);
-        // console.log(data)
+        console.log(data)
         for(var i =0; i<data.length; i++){
-            console.log(data[i].text)
+            // console.log(data[i])
         }
+
+        data.forEach(function(tweet, i, data){
+            // console.log(tweet)
+            $("#tweets").append(form_tweet(tweet))
+
+
+        })
     };
 
     web_socket.onclose = function(e) {
@@ -67,7 +117,8 @@
                 'username': username
             }))    
         }
-        // console.log(web_socket)
+        
+        $(".tweet-loading").fadeIn(100);
         
 
     })
