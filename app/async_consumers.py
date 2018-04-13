@@ -36,7 +36,7 @@ async def parser(username=None, app_consumer=None, task_uid=None):
     print(f"Start parsing: {username}")
     options = webdriver.ChromeOptions()
     # options.add_argument("--start-maximized")
-    # options.add_argument("--headless")
+    options.add_argument("--headless")
     driver = webdriver.Chrome("./app/webdriver/chromedriver", chrome_options=options)
     
     # driver_tasks[task_uid] = driver
