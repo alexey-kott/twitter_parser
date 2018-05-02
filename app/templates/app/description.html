@@ -23,13 +23,11 @@
             </a>
             <br>
         </div>
-        <div id='conten'>
-        </div>
         <script type='text/javascript'>
-            document.getElementById("conten").innerHTML = document.getElementById("en").innerHTML;
 
             function toggle(id) {
-                document.getElementById("conten").innerHTML = document.getElementById(id).innerHTML;
+                $(".conten div").fadeOut(1);
+                $('#'+id).fadeIn(1);
                 $(function () {
                     $('.to-cut-pres').readmore({
                         speed: 500,
@@ -37,7 +35,7 @@
                         moreLink: '<p class="more"><a href="#" class="btn btn-default">Leer más</a></p>',
                         collapsedHeight: 3400,
                     });
-                });
+                {#});#}
             }
 
         </script>

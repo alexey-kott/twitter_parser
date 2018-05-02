@@ -45,7 +45,8 @@ $('#username-input').on("keyup", function (e) {
 })
 
 $('#username-submit').on("click", function (e) {
-    var username = $('#username-input').val()
+    var username = $('#username-input').val();
+    console.log(username)
     if (username === '') return 0;
 
     if (web_socket.readyState === 3) {
