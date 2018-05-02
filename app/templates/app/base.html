@@ -1,0 +1,101 @@
+
+{% load staticfiles %}
+<!DOCTYPE html>
+<!--[if lt IE 7]><html lang="es" class="lt-ie9 lt-ie8 lt-ie7"><![endif]-->
+<!--[if IE 7]><html lang="es" class="lt-ie9 lt-ie8"><![endif]-->
+<!--[if IE 8]><html lang="es" class="lt-ie9"><![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+	<title>Bounty Lifehack</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="description" content="" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="{% static 'libs/bootstrap/bootstrap.css' %}" />
+	<link rel="stylesheet" href="{% static 'libs/fancybox/jquery.fancybox.css' %}" />
+	<link rel="stylesheet" href="{% static 'libs/owl-carousel/owl.carousel.css' %}" />
+	<link rel="stylesheet" href="{% static 'libs/countdown/jquery.countdown.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/fonts.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/main.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/media.css' %}" />
+	<script defer src="{%  static 'libs/fontawesome-free-5.0.6/svg-with-js/js/fontawesome-all.js' %}"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<!--Favicon-->
+	<link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicons/apple-touch-icon.png' %}">
+	<link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicons/favicon-32x32.png' %}">
+	<link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicons/favicon-16x16.png' %}">
+	<link rel="manifest" href="{% static 'favicons/site.webmanifest' %}">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+<header class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container wrap">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">Bounty Lifehack</a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+
+
+          	<li id="main-menu-item-1"><a href="/">About the project</a></li>
+          	<li id="main-menu-item-2"><a href="/twitter-report/">Twitter reports</a></li>
+            {% if not user.is_authenticated %}
+                <li id="main-menu-item-3"><a href="/oauth/login/twitter/">Login via Twitter</a></li>
+            {% else %}
+                <!--<li id="main-menu-item-3"><a href="/logout/">Log out</a></li>-->
+            {% endif %}
+        </ul>
+      </div>
+    </div>
+</header>
+
+
+
+{% block description %}{% endblock %}
+{% block twitter-reports %}{% endblock %}
+
+
+
+
+<!--
+<footer class="foot">
+	<div class="footer-content wrap">
+		<p>Bounty Lifehack Project &#169; 2018 </p>
+		<p><a href="mailto:area.comunicacion@gipes-uam.com">bounty.lifehack@gmail.com</a></p>
+		<span class="for-members"></span>
+	</div>
+</footer>
+-->
+<!-- navbar-fixed-bottom - для прижатия к низу -->
+<!--[if lt IE 9]>
+	<script src="{%  static 'libs/html5shiv/es5-shim.min.js' %}"></script>
+	<script src="{%  static 'libs/html5shiv/html5shiv.min.js' %}"></script>
+	<script src="{%  static 'libs/html5shiv/html5shiv-printshiv.min.js' %}"></script>
+	<script src="{%  static 'libs/respond/respond.min.js' %}"></script>
+	<![endif]-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="{% static 'libs/bootstrap/bootstrap.js' %}"></script>
+	<script src="{% static 'libs/jquery/jquery-1.11.1.min.js' %}"></script>
+	<script src="{% static 'libs/jquery-mousewheel/jquery.mousewheel.min.js' %}"></script>
+	<script src="{% static 'libs/fancybox/jquery.fancybox.pack.js' %}"></script>
+	<script src="{% static 'libs/waypoints/waypoints-1.6.2.min.js' %}"></script>
+	<script src="{% static 'libs/scrollto/jquery.scrollTo.min.js' %}"></script>
+	<script src="{% static 'libs/owl-carousel/owl.carousel.min.js' %}"></script>
+	<script src="{% static 'libs/countdown/jquery.plugin.js' %}"></script>
+	<script src="{% static 'libs/countdown/jquery.countdown.min.js' %}"></script>
+	<script src="{% static 'libs/countdown/jquery.countdown-ru.js' %}"></script>
+	<script src="{% static 'libs/landing-nav/navigation.js' %}"></script>
+	<script src="{% static 'js/common.js' %}"></script>
+	<!-- Yandex.Metrika counter --><!-- /Yandex.Metrika counter -->
+	<!-- Google Analytics counter --><!-- /Google Analytics counter -->
+</body>
+</html>

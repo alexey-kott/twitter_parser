@@ -1,0 +1,41 @@
+<div class="presentation-block">
+
+    <h1 class="topic-title">About the project</h1>
+
+
+
+
+
+
+
+
+    <div class="lang-menu">
+        <a href='javascript://' class="lang-slider-item" onclick='toggle("en");'>
+            English
+        </a>
+        <a href='javascript://' class="lang-slider-item" onclick='toggle("ru");'>
+            Русский
+        </a>
+        <a href='javascript://' class="lang-slider-item" onclick='toggle("es");'>
+            Español
+        </a>
+        <br>
+    </div>
+    <div id='conten'>
+    </div>
+    <script type='text/javascript'>
+        document.getElementById("conten").innerHTML = document.getElementById("en").innerHTML;
+
+        function toggle(id) {
+            document.getElementById("conten").innerHTML = document.getElementById(id).innerHTML;
+            $(function () {
+                $('.to-cut-pres').readmore({
+                    speed: 500,
+                    lessLink: '<p class="more"><a href="#" class="btn btn-default">Atrás</a></p>',
+                    moreLink: '<p class="more"><a href="#" class="btn btn-default">Leer más</a></p>',
+                    collapsedHeight: 3400,
+                });
+            });
+        }
+
+    </script>

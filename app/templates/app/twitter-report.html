@@ -1,0 +1,37 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block twitter-reports %}
+
+    <main class="conten wrap twitter-report-page">
+
+        <h1 class="topic-title">Twitter reports</h1>
+        <div class="conten2">
+            <form>
+                <button type="submit" class="btn btn-primary" id="username-submit" style="margin-bottom: 18px; margin-top: 10px;">Collect
+                    data from Twitter
+                </button>
+            </form>
+            <form>
+                <input type="hidden" value="{{ user }}" id="username-input">
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Data from your spreadsheet</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <small id="emailHelp" class="form-text text-muted">Insert your data here</small>
+                </div>
+                <input type="button" class="btn btn-primary" value="Process data, get reports" />
+            </form>
+        </div>
+    </main>
+
+
+    <script>
+        $("#main-menu-item-2").addClass("active");
+    </script>
+
+    <script src="{% static 'js/parser_requests.js' %}"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{% static 'js/readmore.js' %}"></script>
+
+{% endblock %}

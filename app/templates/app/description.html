@@ -1,0 +1,148 @@
+{% extends 'app/base.html' %}
+
+{% load staticfiles %}
+{% load static %}
+
+{% block description %}
+
+
+    <div class="presentation-block">
+
+        <h1 class="topic-title">About the project</h1>
+
+
+        <div class="lang-menu">
+            <a href='javascript://' class="lang-slider-item" onclick='toggle("en");'>
+                English
+            </a>
+            <a href='javascript://' class="lang-slider-item" onclick='toggle("ru");'>
+                Русский
+            </a>
+            <a href='javascript://' class="lang-slider-item" onclick='toggle("es");'>
+                Español
+            </a>
+            <br>
+        </div>
+        <div id='conten'>
+        </div>
+        <script type='text/javascript'>
+            document.getElementById("conten").innerHTML = document.getElementById("en").innerHTML;
+
+            function toggle(id) {
+                document.getElementById("conten").innerHTML = document.getElementById(id).innerHTML;
+                $(function () {
+                    $('.to-cut-pres').readmore({
+                        speed: 500,
+                        lessLink: '<p class="more"><a href="#" class="btn btn-default">Atrás</a></p>',
+                        moreLink: '<p class="more"><a href="#" class="btn btn-default">Leer más</a></p>',
+                        collapsedHeight: 3400,
+                    });
+                });
+            }
+
+        </script>
+
+
+        <main class="conten wrap">
+            <div id='en'>
+                <div class="conten2 to-cut-pres">
+                    <p style="margin-top:0px;">
+                    <p>
+                        English
+                        El Grupo de Investigación Reconocido sobre Políticas Educativas Supranacionales [UAM/PR020]
+                        (GIPES),
+                        reúne a un grupo interdisciplinar de profesores universitarios, jóvenes investigadores,
+                        doctorandos
+                        y
+                        profesionales de la educación, interesados en el <b>estudio científico de los emergentes
+                        procesos de
+                        internacionalización de la educación</b> y el impacto de dichos procesos en las políticas
+                        educativas
+                        nacionales y en los sistemas educativos.
+                    </p>
+                    <h2><span class="tit">Líneas de investigación</span></h2>
+                    <p>
+                        El Grupo de Investigación Reconocido sobre Políticas Educativas Supranacionales [UAM/PR020]
+                        (GIPES),
+                        reúne a un grupo interdisciplinar de profesores universitarios, jóvenes investigadores,
+                        doctorandos
+                        y
+                        profesionales de la educación, interesados en el <b>estudio científico de los emergentes
+                        procesos de
+                        internacionalización de la educación</b> y el impacto de dichos procesos en las políticas
+                        educativas
+                        nacionales y en los sistemas educativos.
+                    </p>
+                </div>
+
+                <div id='ru'>
+                    <div class="conten2 to-cut-pres">
+                        <p style="margin-top:0px;">
+                        <p>
+                            Русский
+                            El Grupo de Investigación Reconocido sobre Políticas Educativas Supranacionales [UAM/PR020]
+                            (GIPES),
+                            reúne a un grupo interdisciplinar de profesores universitarios, jóvenes investigadores,
+                            doctorandos
+                            y profesionales de la educación, interesados en el <b>estudio científico de los emergentes
+                            procesos
+                            de internacionalización de la educación</b> y el impacto de dichos procesos en las políticas
+                            educativas nacionales y en los sistemas educativos.
+                        </p>
+                        <h2><span class="tit">Líneas de investigación</span></h2>
+                        <p>
+                            El Grupo de Investigación Reconocido sobre Políticas Educativas Supranacionales [UAM/PR020]
+                            (GIPES),
+                            reúne a un grupo interdisciplinar de profesores universitarios, jóvenes investigadores,
+                            doctorandos
+                            y profesionales de la educación, interesados en el <b>estudio científico de los emergentes
+                            procesos
+                            de internacionalización de la educación</b> y el impacto de dichos procesos en las políticas
+                            educativas nacionales y en los sistemas educativos.
+                        </p>
+                    </div>
+
+                    <div id='es'>
+                        <div class="conten2 to-cut-pres">
+                            <p style="margin-top:0px;">
+                            <p>
+                                Español
+                                El Grupo de Investigación Reconocido sobre Políticas Educativas Supranacionales
+                                [UAM/PR020]
+                                (GIPES), reúne a un grupo interdisciplinar de profesores universitarios, jóvenes
+                                investigadores,
+                                doctorandos y profesionales de la educación, interesados en el <b>estudio científico de
+                                los
+                                emergentes procesos de internacionalización de la educación</b> y el impacto de dichos
+                                procesos
+                                en las políticas educativas nacionales y en los sistemas educativos.
+                            </p>
+                            <h2><span class="tit">Líneas de investigación</span></h2>
+                            <p>
+                                El Grupo de Investigación Reconocido sobre Políticas Educativas Supranacionales
+                                [UAM/PR020]
+                                (GIPES), reúne a un grupo interdisciplinar de profesores universitarios, jóvenes
+                                investigadores,
+                                doctorandos y profesionales de la educación, interesados en el <b>estudio científico de
+                                los
+                                emergentes procesos de internacionalización de la educación</b> y el impacto de dichos
+                                procesos
+                                en las políticas educativas nacionales y en los sistemas educativos.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        $("#main-menu-item-1").addClass("active");
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{% static 'js/readmore.js' %}"></script>
+
+{% endblock %}
+
