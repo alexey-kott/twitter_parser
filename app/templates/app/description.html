@@ -27,15 +27,16 @@
 
             function toggle(id) {
                 $(".conten div").fadeOut(1);
-                $('#'+id).fadeIn(1);
+                $('#' + id).fadeIn(1);
                 $(function () {
                     $('.to-cut-pres').readmore({
                         speed: 500,
                         lessLink: '<p class="more"><a href="#" class="btn btn-default">Atrás</a></p>',
                         moreLink: '<p class="more"><a href="#" class="btn btn-default">Leer más</a></p>',
-                        collapsedHeight: 3400,
+                        collapsedHeight: 3400
                     });
-                {#});#}
+                })
+
             }
 
         </script>
